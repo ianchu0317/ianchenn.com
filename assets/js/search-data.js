@@ -30,7 +30,18 @@ ninja.data = [{
           handler: () => {
             window.location.href = "/cv/";
           },
-        },{id: "post-time-to-upgrade-my-homelab",
+        },{id: "post-homelab-network-speed-test",
+        
+          title: "Homelab network speed test",
+        
+        description: "solving networking speed problem in my homelab",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2025/homelab-speed-test/";
+          
+        },
+      },{id: "post-time-to-upgrade-my-homelab",
         
           title: "Time to upgrade my homelab",
         
