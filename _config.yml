@@ -272,7 +272,7 @@ jekyll-archives:
     enabled: [year, tags, categories] # enables year, tag and category archives (remove if you need to disable one of them).
 
 display_tags: ["images", "math", "code", "linux", "pc", "networking"] # these tags will be displayed on the front page of your blog
-display_categories: ["programming", "homelab"] # these categories will be displayed on the front page of your blog
+display_categories: ["programming", "homelab", "spanish", "english"] # these categories will be displayed on the front page of your blog
 
 # -----------------------------------------------------------------------------
 # Jekyll Scholar

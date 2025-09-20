@@ -4,7 +4,7 @@ title: Ordenar pila ⛁ (merge two sorted stacks)
 date: 2025-09-19 20:45:00
 description: Ejercicio de ordenar dos pilas ordenas en una sola
 tags: pc code
-categories: programming
+categories: programming spanish
 thumbnail: 
 ---
 

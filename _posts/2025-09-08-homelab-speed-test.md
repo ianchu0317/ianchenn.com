@@ -4,7 +4,7 @@ title: Homelab network speed test
 date: 2025-09-08 15:05:00
 description: solving networking speed problem in my homelab
 tags: networking pc linux
-categories: homelab
+categories: homelab english
 thumbnail: 
 images:
     slider: true

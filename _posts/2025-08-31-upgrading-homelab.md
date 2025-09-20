@@ -4,7 +4,7 @@ title: Time to upgrade my homelab
 date: 2025-08-31 21:13:00
 description: It's time to make my homelab network faster
 tags: networking pc linux
-categories: homelab
+categories: homelab english
 thumbnail: assets/img/homelab-1.jpg
 images:
     slider: true
