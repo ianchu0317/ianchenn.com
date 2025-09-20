@@ -25,12 +25,23 @@ ninja.data = [{
           },
         },{id: "nav-cv",
           title: "cv",
-          description: "This is a description of the page. You can modify it in &#39;_pages/cv.md&#39;. You can also change or remove the top pdf download button.",
+          description: "",
           section: "Navigation",
           handler: () => {
             window.location.href = "/cv/";
           },
-        },{id: "post-homelab-network-speed-test",
+        },{id: "post-ordenar-pila-merge-two-sorted-stacks",
+        
+          title: "Ordenar pila ⛁ (merge two sorted stacks)",
+        
+        description: "Ejercicio de ordenar dos pilas ordenas en una sola",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2025/order-stack/";
+          
+        },
+      },{id: "post-homelab-network-speed-test",
         
           title: "Homelab network speed test",
         
