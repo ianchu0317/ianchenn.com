@@ -30,7 +30,18 @@ ninja.data = [{
           handler: () => {
             window.location.href = "/cv/";
           },
-        },{id: "post-ordenar-pila-merge-two-sorted-stacks",
+        },{id: "post-reinstall-homelab",
+        
+          title: "Reinstall homelab",
+        
+        description: "Systems reinstall and reorganization",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2025/reinstall-homelab/";
+          
+        },
+      },{id: "post-ordenar-pila-merge-two-sorted-stacks",
         
           title: "Ordenar pila ⛁ (merge two sorted stacks)",
         
