@@ -104,6 +104,11 @@ ninja.data = [{
           description: "An elevator simulation made with Raspberry PI",
           section: "Projects",handler: () => {
               window.location.href = "/projects/micro-lift/";
+            },},{id: "projects-ocr-server",
+          title: 'OCR Server',
+          description: "Simple OCR server with Tesseract and FastAPI - Deploy on https://ocr.ianchenn.com/images/",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/ocr-server/";
             },},{
         id: 'social-email',
         title: 'email',
