@@ -5,6 +5,8 @@ date: 2025-09-24 20:36:00
 description: Homelab remote access
 tags: networking pc linux
 categories: homelab english
+images:
+    slider: true
 ---
 
 During my trip, I was able to connect to the services hosted in my homelab (like Minecraft) thanks to the various remote access methods I had previously configured.
