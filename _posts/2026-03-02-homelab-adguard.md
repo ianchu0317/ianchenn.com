@@ -5,6 +5,7 @@ description: "Deploying AdGuard Home as a Network DNS"
 date: 2026-03-02 15:30:00 -0300
 categories: homelab networking
 tags: homelab
+thumbnail: assets/img/adguard_dashboard.png
 ---
 
 ### **🏰🪄✨ Magic at the DNS Level: Ad-Free Disney+ and Beyond**

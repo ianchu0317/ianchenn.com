@@ -5,6 +5,7 @@ description: "4TB+ Storage and OpenMediaVault Integration"
 date: 2026-02-20 10:00:00 -0300
 categories: homelab infrastructure
 tags: proxmox openmediavault nas storage
+thumbnail: assets/img/omv_logo.png
 ---
 
 ### **Adding 4TB+ to the Cluster** 💾
