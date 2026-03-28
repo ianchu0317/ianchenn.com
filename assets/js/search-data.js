@@ -30,11 +30,44 @@ ninja.data = [{
           handler: () => {
             window.location.href = "/cv/";
           },
-        },{id: "post-expanding-the-lab-4tb-storage-and-openmediavault-integration",
+        },{id: "post-3-2-1-backup",
         
-          title: "Expanding the Lab: 4TB+ Storage and OpenMediaVault Integration",
+          title: "3 2 1... Backup",
         
-        description: "",
+        description: "Automating Remote Backups with Rclone and Backblaze B2",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2026/backblaze/";
+          
+        },
+      },{id: "post-no-more-ads",
+        
+          title: "No More Ads",
+        
+        description: "Deploying AdGuard Home as a Network DNS",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2026/homelab-adguard/";
+          
+        },
+      },{id: "post-my-self-hosted-google-photos-alternative",
+        
+          title: "My Self-Hosted Google Photos Alternative",
+        
+        description: "Deploying Immich on Proxmox to manage +4TB of personal photos and videos with full privacy.",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2026/homelab-immich/";
+          
+        },
+      },{id: "post-expanding-the-lab",
+        
+          title: "Expanding the Lab",
+        
+        description: "4TB+ Storage and OpenMediaVault Integration",
         section: "Posts",
         handler: () => {
           
