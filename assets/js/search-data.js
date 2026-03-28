@@ -30,7 +30,18 @@ ninja.data = [{
           handler: () => {
             window.location.href = "/cv/";
           },
-        },{id: "post-3-2-1-backup",
+        },{id: "post-storage-management",
+        
+          title: "Storage Management",
+        
+        description: "LVM, fstab, and Autofs",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2026/lvm/";
+          
+        },
+      },{id: "post-3-2-1-backup",
         
           title: "3 2 1... Backup",
         
