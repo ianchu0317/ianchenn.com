@@ -30,7 +30,29 @@ ninja.data = [{
           handler: () => {
             window.location.href = "/cv/";
           },
-        },{id: "post-reinstall-homelab",
+        },{id: "post-expanding-the-lab-4tb-storage-and-openmediavault-integration",
+        
+          title: "Expanding the Lab: 4TB+ Storage and OpenMediaVault Integration",
+        
+        description: "",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2026/homelab-nas/";
+          
+        },
+      },{id: "post-how-do-i-access-my-homelab-remotely-18-000-km-away",
+        
+          title: "How do I access my homelab remotely (+18,000 km away) 🇹🇼",
+        
+        description: "Homelab remote access",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2025/homelab-tw/";
+          
+        },
+      },{id: "post-reinstall-homelab",
         
           title: "Reinstall homelab",
         
@@ -104,6 +126,11 @@ ninja.data = [{
           description: "An elevator simulation made with Raspberry PI",
           section: "Projects",handler: () => {
               window.location.href = "/projects/micro-lift/";
+            },},{id: "projects-nanolinq-url-shortener",
+          title: 'Nanolinq - URL Shortener',
+          description: "A high-performance URL shortener written in Go, featuring a full web interface and automated CI/CD deployment on Proxmox.",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/nanolinq/";
             },},{id: "projects-ocr-server",
           title: 'OCR Server',
           description: "Simple OCR server with Tesseract and FastAPI - Deploy on https://ocr.ianchenn.com/images/",
