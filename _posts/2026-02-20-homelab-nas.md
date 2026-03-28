@@ -1,6 +1,7 @@
 ---
 layout: post
-title: "Expanding the Lab: 4TB+ Storage and OpenMediaVault Integration"
+title: "Expanding the Lab" 
+description: "4TB+ Storage and OpenMediaVault Integration"
 date: 2026-02-20 10:00:00 -0300
 categories: homelab infrastructure
 tags: proxmox openmediavault nas storage
