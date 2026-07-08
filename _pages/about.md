@@ -36,3 +36,44 @@ I've started learning _Programming_ and _Networking_ at the age of 14. And this 
 In my free time I play piano and flute, watch videos about new technologies and **DIY** projects on Youtube. 
 
 I've built this website to post my learnings and document my projects :) 
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "name": "Ian Chen",
+  "url": "https://www.ianchenn.com",
+  "image": "https://www.ianchenn.com/assets/img/prof_pic.jpg",
+  "jobTitle": "System Administrator & Software Developer",
+  "description": "Software Engineering student at UBA, focused on server infrastructure, Linux, and development.",
+  "knowsAbout": [
+    "System Administration",
+    "Proxmox VE",
+    "Docker",
+    "Linux Server Management",
+    "Go",
+    "Bash Scripting",
+    "C",
+    "Homelab"
+  ],
+  "alumniOf": [
+    {
+      "@type": "CollegeOrUniversity",
+      "name": "Universidad de Buenos Aires (UBA)"
+    },
+    {
+      "@type": "HighSchool",
+      "name": "Colegio Nacional de Buenos Aires"
+    }
+  ],
+  "address": {
+    "@type": "PostalAddress",
+    "addressLocality": "Buenos Aires",
+    "addressCountry": "AR"
+  },
+  "sameAs": [
+    "https://www.linkedin.com/in/ianchenn",
+    "https://github.com/ianchu0317"
+  ]
+}
+</script>
