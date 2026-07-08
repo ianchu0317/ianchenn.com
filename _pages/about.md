@@ -25,8 +25,6 @@ latest_posts:
   limit: 3 # leave blank to include all the blog posts
 ---
 
-<meta name="google-site-verification" content="fE7kdQ7uZp5wgNAd4ZDH_zYl2aPC9VK0fywAnMyeMBQ" />
-
 If I had to describe myself with one word, it would be _curious_. 
 
 Since I was a kid I like to learn and try new things, and so I'm very self-taught. 
