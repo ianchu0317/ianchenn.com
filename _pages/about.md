@@ -25,6 +25,7 @@ latest_posts:
   limit: 3 # leave blank to include all the blog posts
 ---
 
+<meta name="google-site-verification" content="fE7kdQ7uZp5wgNAd4ZDH_zYl2aPC9VK0fywAnMyeMBQ" />
 
 If I had to describe myself with one word, it would be _curious_. 
 
